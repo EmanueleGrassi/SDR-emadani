@@ -14,54 +14,45 @@ public class Threshold {
         this.energy = energy;
     }
 
-    public double generate() throws Exception
+    public double genera() throws Exception
     {
-        double threshold, mean, variance;
+        double threshold, media, varianza;
 
-        mean = this.mean(energy);
-        variance = this.variance(energy, mean);
-        threshold = mean + (2.0*Math.sqrt(variance)) * this.invErf(1.0 - 2.0 * PFA);
+        media = this.mean(energy);
+        varianza = this.variance(energy, media);
+        threshold = media + (2.0*Math.sqrt(varianza)) * this.invErf(1.0 - 2.0 * PFA);
 
         return threshold;
     }
 
     /**
-     * Calcola il mean.
-     *
-     * @param values
-     * @return valore medio
+     *  calcola la media
      */
-    private double mean(double[] values){
-        double mean = 0;
+    private double mean(double[] valori){
+        double media = 0;
+        int numElementi = valori.length;
 
-        for(double value : values)
-            mean += value;
+        for(double value : valori)
+            media += value;
 
-        return mean / (double)values.length;
+        return media / (double)numElementi;
     }
 
     /**
-     * Calcola la varianza.
-     *
-     * @param values
-     * @param mean
-     * @return varianza
+     *  calcola la varianza
      */
-    private double variance(double[] values, double mean){
-        double variance = 0;
+    private double variance(double[] valori, double media){
+        double varianza = 0;
+        int numElementi = valori.length;
 
-        for(double value : values)
-            variance += Math.pow(value - mean, 2);
+        for(double d : valori)
+            varianza += Math.pow(d - media, 2);
 
-        return variance / (double)values.length;
+        return varianza / (double)numElementi;
     }
 
     /**
      * invErf
-     *
-     * @param d
-     * @return
-     * @throws Exception
      */
     public static double invErf(double d) throws Exception {
         if (Math.abs(d) > 1) {
@@ -79,7 +70,6 @@ public class Threshold {
             BigDecimal bd = new BigDecimal(0, MathContext.UNLIMITED);
             BigDecimal x = new
                     BigDecimal(d * Math.sqrt(Math.PI) / 2, MathContext.UNLIMITED);
-            // System.out.println(x);
             String[] A092676 = {"1", "1", "7", "127", "4369", "34807",
                     "20036983", "2280356863",
                     "49020204823", "65967241200001",
@@ -123,8 +113,6 @@ public class Threshold {
                 BigDecimal den = new BigDecimal(new BigInteger(A092677[i]), 50);
 
                 BigDecimal coeff = num.divide(den, RoundingMode.HALF_UP);
-
-                // System.out.println(coeff);
 
                 BigDecimal xBD = x.pow(i * 2 + 1, MathContext.UNLIMITED);
 

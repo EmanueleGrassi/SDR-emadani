@@ -1,19 +1,16 @@
 import java.util.Random;
 
 
-public class SignalFactory {
+public class SignalGenerator {
 	 /**
-     * Genero un segnale random QPSK.
-     *
-     * @param size
-     * @return
+     *  genera un segnale QPSK random
      */
     public static Signal RandomQPSK(int size) throws Exception {
         double[] re = new double[size];
         double[] im = new double[size];
         for (int i = 0; i < size; i++) {
-            double v = Math.random();
-            if (v < 0.5)
+            double d = Math.random();
+            if (d < 0.5)
                 re[i] = 1/Math.sqrt(2);
             else
                 re[i] = -1/Math.sqrt(2);
@@ -28,11 +25,7 @@ public class SignalFactory {
     }
 
     /**
-     * Genero un rumore bianco gaussiano.
-     *
-     * @param snr
-     * @param size
-     * @return
+     *  genera un rumore bianco gaussiano
      */
     public static Signal Noise(double snr, int size) throws Exception {
         Random campione = null;

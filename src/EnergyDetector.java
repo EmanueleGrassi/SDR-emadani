@@ -46,7 +46,7 @@ public class EnergyDetector {
     public double generateThreshold() throws Exception {
         double[] energy = new double[attempts];
 
-        Signal noise = SignalFactory.Noise(signal.getSNR(), 10000);
+        Signal noise = SignalGenerator.Noise(signal.getSNR(), 10000);
 
         for(int i = 0; i < attempts; i++){
             energy[i] = noise.getEnergy();
@@ -54,7 +54,7 @@ public class EnergyDetector {
 
         Threshold threshold = new Threshold(energy);
 
-        return threshold.generate();
+        return threshold.genera();
     }
 
     /**
