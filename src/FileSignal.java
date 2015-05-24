@@ -4,7 +4,6 @@ import java.io.FileReader;
 public class FileSignal {
 
     public static final int SIZE = 1000000;
-    private ArraySignal data;
     private String filename;
 
     private double reali[] = new double[SIZE];
@@ -12,7 +11,7 @@ public class FileSignal {
 
     public FileSignal(String filename) throws Exception {
         this.filename = filename;
-        this.data = this.initializeListArraySignal();
+        this.initializeListArraySignal();
     }
 
 
@@ -22,14 +21,11 @@ public class FileSignal {
      * @return data
      * @throws Exception
      */
-    public ArraySignal getSignal() throws Exception {
-    	return this.data;
-    }
 
     /**
      * Genero un ArraySignal partendo dal file.
      */
-    private ArraySignal initializeListArraySignal() throws Exception {
+    private void initializeListArraySignal() throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader(this.filename));
         String line;
         int i = 0;
@@ -41,8 +37,6 @@ public class FileSignal {
             i++;
         }
         reader.close();
-
-        return new ArraySignal(reali, immaginari);
     }
 
     private double[] getValue(String line) {
@@ -51,5 +45,20 @@ public class FileSignal {
 
         return result;
     }
+
+
+	public static int getSize() {
+		return SIZE;
+	}
+
+
+	public double[] getReali() {
+		return reali;
+	}
+
+
+	public double[] getImmaginari() {
+		return immaginari;
+	}
 
 }

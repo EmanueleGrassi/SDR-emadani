@@ -12,17 +12,11 @@ import java.util.List;
  */
 public class Signal {
 
-    private ArraySignal data;
+    private int size;
+    private double[] reali;
+    private double[] immaginari;
     private String path;
 
-    /**
-     * Genero un segnale da un ArraySignal.
-     *
-     * @param data
-     */
-    public Signal(ArraySignal data) {
-        this.data = data;
-    }
 
     /**
      * Genero un segnale da un file.
@@ -32,10 +26,19 @@ public class Signal {
     public Signal(String path) throws Exception {
         FileSignal s = new FileSignal(path);
         this.path = path;
-        this.data = s.getSignal();
+        this.size = s.SIZE;
+		this.reali = s.getReali();
+		this.immaginari = s.getImmaginari();
     }
 
-    /**
+    public Signal(int size, double[] reali, double[] immaginari) {
+		super();
+		this.size = size;
+		this.reali = reali;
+		this.immaginari = immaginari;
+	}
+
+	/**
      * Splitta un segnale in più segnali
      * da n campioni ciascuno.
      *
@@ -95,6 +98,18 @@ public class Signal {
         return energyDetector.getThreshold();
     }
 
+    public int size() {
+        return this.size;
+    }
+
+    public double[] getReali() {
+        return this.reali;
+    }
+
+    public double[] getImmaginari() {
+        return this.immaginari;
+    }
+    
     @Override
     public String toString() {
         String str = "";
