@@ -1,78 +1,61 @@
 import java.util.List;
 
 public class EnergyDetector {
+	
     private Signal signal;
-    private int attempts;
+    private int tentativi;
 
     private double threshold;
 
-    /**
-     * Istanzio un segnale e il numero di prove.
-     *
-     * @param signal
-     * @param attempts
-     */
-    public EnergyDetector(Signal signal, int attempts) throws Exception {
+    public EnergyDetector(Signal signal, int tentativi) throws Exception {
         this.signal = signal;
-        this.attempts = attempts;
+        this.tentativi = tentativi;
         this.threshold = this.generateThreshold();
     }
 
     /**
-     * Restituisce il numero di successi.
-     *
-     * @return
-     * @throws Exception
-     */
-    public double detected() throws Exception {
-        int detected = 0;
-        List<Signal> signals = signal.split(attempts);
-        for(Signal s : signals) {
-            detected += this.detection(s) ? 1 : 0;
-        }
-        return detected;
-    }
-
-    public double getProbabilityOfDetection() throws Exception {
-        return this.detected() / (double)this.attempts * (double)100;
-    }
-
-    /**
-     * Genero la soglia (offline).
-     *
-     * @return
-     * @throws Exception
+     *  genera il threshold
      */
     public double generateThreshold() throws Exception {
-        double[] energy = new double[attempts];
+    	
+        double[] energy = new double[tentativi];
+        Signal noise = SignalGenerator.Noise(this.signal.getSNR(), 10000);
 
-        Signal noise = SignalGenerator.Noise(signal.getSNR(), 10000);
-
-        for(int i = 0; i < attempts; i++){
+        for(int i = 0; i < tentativi; i++){
             energy[i] = noise.getEnergy();
         }
 
         Threshold threshold = new Threshold(energy);
-
         return threshold.genera();
+    }
+    
+    /**
+     * calcola il numero di successi
+     */
+    public double detected() throws Exception {
+        int detected = 0;
+        List<Signal> signals = signal.split(tentativi);
+        for(Signal s : signals) {
+        	if (this.detection(s))
+        		detected ++;
+        }
+        return detected;
+    }
+    
+    /**
+     * probability of detection in percentuale
+     */
+    public double getPoD() throws Exception {
+        return this.detected() / (double)this.tentativi * (double)100;
     }
 
     /**
-     * Controllo che ci sia detection.
-     *
-     * @param s
-     * @return
-     * @throws Exception
+     *  se l'energia è minore del threshold non ho detection
      */
     private boolean detection(Signal s) throws Exception {
         return s.getEnergy() > threshold;
     }
-
-    /**
-     * Restituisce il valore della soglia.
-     *
-     * @return
-     */
+    
     public double getThreshold() {
         return threshold;
     }

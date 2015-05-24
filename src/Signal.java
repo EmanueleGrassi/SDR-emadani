@@ -65,33 +65,22 @@ public class Signal {
             Complex c = new Complex(this.data.getReali()[i], this.data.getImmaginari()[i]);
             energy += Math.pow(Complex.abs(c), 2);
         }
-
-        energy = energy/this.data.size();
-
-        return energy;
+        
+        return energy/this.data.size();
     }
 
     /**
-     * Restituisce SNR del segnale.
-     *
-     * @return SNR in Db
+     *  snr in decibel
      */
     public double getSNR()
     {
-        double snrNonDB = 1.0/(this.getEnergy()-1);
-        return 10 * Math.log10(snrNonDB);
+        double snr = 1.0/(this.getEnergy()-1);
+        return 10 * Math.log10(snr);
     }
 
-    /**
-     * Restituisce la probabilità di detection.
-     *
-     * @param attempts
-     * @return
-     * @throws Exception
-     */
-    public double getDetection(int attempts) throws Exception {
-        EnergyDetector energyDetector = new EnergyDetector(this, attempts);
-        return energyDetector.getProbabilityOfDetection();
+    public double getDetection(int tentativi) throws Exception {
+        EnergyDetector energyDetector = new EnergyDetector(this, tentativi);
+        return energyDetector.getPoD();
     }
 
     /**
