@@ -45,7 +45,7 @@ public class Complex {
         return new Complex(c.getReale(), -c.getImmaginario());
     }
 
-    public static double abs(Complex c) {
+    public static double modulo(Complex c) {
         return Math.hypot(c.getReale(), c.getImmaginario());
     }
 
@@ -62,41 +62,12 @@ public class Complex {
         return Complex.prodotto(c1, Complex.reciproco(c2));
     }
 
-    public static Complex exp(Complex c) {
+    public static Complex esponenziale(Complex c) {
         return new Complex(
                 Math.exp(c.getReale()) * Math.cos(c.getImmaginario()),
                 Math.exp(c.getReale()) * Math.sin(c.getImmaginario())
         );
     }
-
-    public static Complex sin(Complex c) {
-        return new Complex(
-                Math.cosh(c.getImmaginario()) * Math.sin(c.getReale()),
-                Math.sinh(c.getImmaginario()) * Math.cos(c.getReale())
-        );
-    }
-
-    public static Complex cos(Complex c) {
-        return new Complex(
-                Math.cosh(c.getImmaginario()) * Math.cos(c.getReale()),
-                -1 * Math.sinh(c.getImmaginario()) * Math.sin(c.getReale())
-        );
-    }
-
-    public static Complex sinh(Complex c) {
-        return new Complex(
-                Math.sinh(c.getReale()) * Math.cos(c.getImmaginario()),
-                Math.cosh(c.getReale()) * Math.sin(c.getImmaginario())
-        );
-    }
-
-    public static Complex cosh(Complex c) {
-        return new Complex(
-                Math.cosh(c.getReale()) * Math.cos(c.getImmaginario()),
-                Math.sinh(c.getReale()) * Math.sin(c.getImmaginario())
-        );
-    }
-
 
     public double getReale() {
         return this.reale;
@@ -109,11 +80,7 @@ public class Complex {
     public double getImmaginario() {
         return immaginario;
     }
-
-    public Complex moduloQuadro() {
-        return this.complessoConiugato(this);
-    }
-
+    
     public void setImmaginario(double immaginario) {
         this.immaginario = immaginario;
     }

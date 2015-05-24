@@ -63,7 +63,7 @@ public class Signal {
 
         for (int i = 0; i< data.size(); i++) {
             Complex c = new Complex(this.data.getReali()[i], this.data.getImmaginari()[i]);
-            energy += Math.pow(Complex.abs(c), 2);
+            energy += Math.pow(Complex.modulo(c), 2);
         }
         
         return energy/this.data.size();
