@@ -9,12 +9,12 @@ public class EnergyDetector {
     private Signal signal;
     private int tentativi;
 
-    private double threshold;
+    private double soglia;
 
     public EnergyDetector(Signal signal, int tentativi) throws Exception {
         this.signal = signal;
         this.tentativi = tentativi;
-        this.threshold = this.generateThreshold();
+        this.soglia = this.generateThreshold();
     }
 
     /**
@@ -57,11 +57,11 @@ public class EnergyDetector {
      *  se l'energia è minore del threshold non ho detection
      */
     private boolean detection(Signal s) throws Exception {
-        return s.getEnergy() > threshold;
+        return s.getEnergy() > soglia;
     }
     
     public double getThreshold() {
-        return threshold;
+        return soglia;
     }
 
 }

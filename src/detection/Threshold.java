@@ -17,26 +17,26 @@ public class Threshold {
 
     public double genera() throws Exception
     {
-        double threshold, media, varianza;
+        double soglia, media, varianza;
 
-        media = this.mean(energy);
+        media = this.average(energy);
         varianza = this.variance(energy, media);
-        threshold = media + (2.0*Math.sqrt(varianza)) * this.invErf(1.0 - 2.0 * PFA);
+        soglia = media + (2.0*Math.sqrt(varianza)) * this.invErf(1.0 - 2.0 * PFA);
 
-        return threshold;
+        return soglia;
     }
 
     /**
-     *  calcola la media
+     *  calcola la media																																			
      */
-    private double mean(double[] valori){
-        double media = 0;
+    private double average(double[] valori){
+        double somma = 0;
         int numElementi = valori.length;
 
         for(double value : valori)
-            media += value;
+            somma += value;
 
-        return media / (double)numElementi;
+        return somma / (double)numElementi;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Threshold {
      */
     public static double invErf(double d) throws Exception {
         if (Math.abs(d) > 1) {
-            throw new Exception("Allowed values for argument in [-1,1]");
+            throw new Exception("Sono validi solo numeri tra [-1,1]");
         }
 
         if (Math.abs(d) == 1) {
