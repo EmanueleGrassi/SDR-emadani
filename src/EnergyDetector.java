@@ -34,7 +34,7 @@ public class EnergyDetector {
      */
     public double detected() throws Exception {
         int detected = 0;
-        List<Signal> signals = signal.split(tentativi);
+        List<Signal> signals = signal.separa(tentativi);
         for(Signal s : signals) {
         	if (this.detection(s))
         		detected ++;

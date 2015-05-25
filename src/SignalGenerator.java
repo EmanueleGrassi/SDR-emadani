@@ -21,7 +21,7 @@ public class SignalGenerator {
                 immaginari[i] = -1/Math.sqrt(2);
         }
 
-        return new Signal(new ArraySignal(reali, immaginari));
+        return new Signal(size, reali, immaginari);
     }
 
     /**
@@ -41,6 +41,6 @@ public class SignalGenerator {
             immaginari[i] = campione.nextGaussian() * Math.sqrt(pot_rumore/2);
         }
 
-        return new Signal(new ArraySignal(reali, immaginari));
+        return new Signal(size, reali, immaginari);
     }
 }
