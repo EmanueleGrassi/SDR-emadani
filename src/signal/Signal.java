@@ -1,10 +1,11 @@
+package signal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- *
- */
+import detection.Complex;
+import detection.EnergyDetector;
+
 public class Signal {
 
     private int size;
@@ -17,7 +18,7 @@ public class Signal {
      *  crea un segnale da file
      */
     public Signal(String path) throws Exception {
-        FileSignal s = new FileSignal(path);
+        SignalDaFile s = new SignalDaFile(path);
         this.path = path;
         this.size = s.SIZE;
 		this.reali = s.getReali();
@@ -33,7 +34,7 @@ public class Signal {
 
     public Signal dividi(int from, int to) throws Exception {
         return new Signal(
-        		to-from, //giusto?
+        		to-from,
                 Arrays.copyOfRange(reali, from, to),
                 Arrays.copyOfRange(immaginari, from, to)
         );
@@ -94,21 +95,21 @@ public class Signal {
     
     @Override
     public String toString() {
-        String str = "";
-        str += ">###" + this.path + "\n";
-        str += ">SNR: " + this.getSNR() + "\n";
-        str += ">Energia: " + this.getEnergy() + "\n";
+        String s = "";
+        s += "File: " + this.path + "\n";
+        s += "SNR: " + this.getSNR() + "\n";
         try {
-            str += ">Soglia: " + this.getThreshold(1000) + "\n";
+            s += "Soglia: " + this.getThreshold(1000) + "\n";
         } catch (Exception e) {
             e.printStackTrace();
         }
+        s += "Energia: " + this.getEnergy() + "\n";
         try {
-            str += ">Detection (%): " + this.getDetection(1000) + "%\n";
+            s += "Detection (in percentuale): " + this.getDetection(1000) + "\n";
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.print("\n\n\n");
-        return str;
+        System.out.print("\n");
+        return s;
     }
 }

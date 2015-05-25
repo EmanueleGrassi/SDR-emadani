@@ -1,7 +1,8 @@
+package signal;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class FileSignal {
+public class SignalDaFile {
 
     public static final int SIZE = 1000000;
     private String filename;
@@ -9,18 +10,10 @@ public class FileSignal {
     private double reali[] = new double[SIZE];
     private double immaginari[] = new double[SIZE];
 
-    public FileSignal(String filename) throws Exception {
+    public SignalDaFile(String filename) throws Exception {
         this.filename = filename;
         this.initializeSignal();
     }
-
-
-    /**
-     * Restituisce il segnale.
-     *
-     * @return data
-     * @throws Exception
-     */
 
     /**
      * Genero un Signal partendo dal file.

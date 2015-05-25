@@ -1,4 +1,8 @@
+package detection;
 import java.util.List;
+
+import signal.Signal;
+import signal.SignalGenerator;
 
 public class EnergyDetector {
 	
