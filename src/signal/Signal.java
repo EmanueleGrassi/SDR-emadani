@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import detection.Complex;
 import detection.EnergyDetector;
 
 public class Signal {

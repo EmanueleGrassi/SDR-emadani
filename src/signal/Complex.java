@@ -1,4 +1,4 @@
-package detection;
+package signal;
 public class Complex {
 
     private double reale;
