@@ -18,7 +18,7 @@ public class Signal {
      */
     public Signal(String path) throws Exception {
         SignalDaFile s = new SignalDaFile(path);
-        this.path = path;
+        this.setPath(path);
         this.size = s.SIZE;
 		this.reali = s.getReali();
 		this.immaginari = s.getImmaginari();
@@ -92,23 +92,11 @@ public class Signal {
         return this.immaginari;
     }
     
-    @Override
-    public String toString() {
-        String s = "";
-        s += "File: " + this.path + "\n";
-        s += "SNR: " + this.getSNR() + "\n";
-        try {
-            s += "Soglia: " + this.getThreshold(1000) + "\n";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        s += "Energia: " + this.getEnergy() + "\n";
-        try {
-            s += "Detection (in percentuale): " + this.getDetection(1000) + "\n";
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.print("\n");
-        return s;
-    }
+    public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
 }
