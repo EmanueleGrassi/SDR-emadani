@@ -11,7 +11,7 @@ public class FileSignal {
 
     public FileSignal(String filename) throws Exception {
         this.filename = filename;
-        this.initializeListArraySignal();
+        this.initializeSignal();
     }
 
 
@@ -23,9 +23,9 @@ public class FileSignal {
      */
 
     /**
-     * Genero un ArraySignal partendo dal file.
+     * Genero un Signal partendo dal file.
      */
-    private void initializeListArraySignal() throws Exception {
+    private void initializeSignal() throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader(this.filename));
         String line;
         int i = 0;

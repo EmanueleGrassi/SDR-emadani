@@ -9,13 +9,12 @@ public class Complex {
     }
 
     public Complex() {
-        this.reale = 0;
-        this.immaginario = 0;
+        this(0,0);
     }
 
     public static Complex somma(Complex c1, Complex c2) throws Exception {
-        if(c1 == null) {
-            throw new Exception("c1 must not be null");
+        if(c1 == null || c2 == null) {
+            throw new Exception("i numeri complessi non devono essere nulli");
         }
         double paRe = c1.getReale() + c2.getReale();
         double paIm = c1.getImmaginario() + c2.getImmaginario();
@@ -23,14 +22,20 @@ public class Complex {
         return new Complex(paRe, paIm);
     }
 
-    public static Complex differenza(Complex c1, Complex c2) {
+    public static Complex differenza(Complex c1, Complex c2) throws Exception {
+    	if(c1 == null || c2 == null) {
+            throw new Exception("i numeri complessi non devono essere nulli");
+        }
         double paRe = c1.getReale() - c2.getReale();
         double paIm = c1.getImmaginario() - c2.getImmaginario();
 
         return new Complex(paRe, paIm);
     }
 
-    public static Complex prodotto(Complex c1, Complex c2) {
+    public static Complex prodotto(Complex c1, Complex c2) throws Exception {
+    	if(c1 == null || c2 == null) {
+            throw new Exception("i numeri complessi non devono essere nulli");
+        }
         double paRe = (c1.getReale() * c2.getReale()) - (c1.getImmaginario() * c2.getImmaginario());
         double paIm = (c1.getReale() * c2.getImmaginario()) + (c1.getImmaginario() * c2.getReale());
 
@@ -49,24 +54,14 @@ public class Complex {
         return Math.hypot(c.getReale(), c.getImmaginario());
     }
 
-    public static Complex reciproco(Complex c) throws Exception {
-    	if (c.getReale() == 0 && c.getImmaginario() == 0) {
-    		throw new Exception("c1 must not be 0");
-    	}
-        double scalare = Math.pow(c.getReale(), 2) + Math.pow(c.getImmaginario(), 2);
-        Complex result = new Complex(c.getReale() / scalare, -(c.getImmaginario() / scalare));
-    	return result;
-    }
-
     public static Complex rapporto(Complex c1, Complex c2) throws Exception {
-        return Complex.prodotto(c1, Complex.reciproco(c2));
-    }
+    	 if(c1 == null || c2 == null) {
+             throw new Exception("i numeri complessi non devono essere nulli");
+         }
+         double paRe = ((c1.getReale()*c2.getReale()) +(c1.getImmaginario()*c2.getImmaginario()))/(Math.pow(c2.getReale(),2) + Math.pow(c2.getImmaginario(),2));
+         double paIm = ((c2.getReale()*c1.getImmaginario()) +(c1.getReale()*c2.getImmaginario()))/(Math.pow(c2.getReale(),2) + Math.pow(c2.getImmaginario(),2));
 
-    public static Complex esponenziale(Complex c) {
-        return new Complex(
-                Math.exp(c.getReale()) * Math.cos(c.getImmaginario()),
-                Math.exp(c.getReale()) * Math.sin(c.getImmaginario())
-        );
+         return new Complex(paRe, paIm);
     }
 
     public double getReale() {
